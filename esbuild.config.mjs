@@ -19,6 +19,8 @@ if (!prod) {
   const t = { bundle: true, format: "esm", platform: "node", target: "node20", logLevel: "warning" };
   await esbuild.build({ ...t, entryPoints: ["src/ihsync.ts"], packages: "external", outfile: "test/ihsync.build.mjs" });
   await esbuild.build({ ...t, entryPoints: ["src/logic.ts"], packages: "external", outfile: "test/logic.build.mjs" });
-  await esbuild.build({ ...t, entryPoints: ["src/main.ts"], alias: { obsidian: "./test/obsidian-stub.mjs" }, outfile: "test/main.build.mjs" });
+  // "obsidian" stays an import of test/obsidian-stub.mjs, so tests share its classes (TFile, TFolder) with main.ts
+  const stub = { name: "obsidian-stub", setup(b) { b.onResolve({ filter: /^obsidian$/ }, () => ({ path: "./obsidian-stub.mjs", external: true })); } };
+  await esbuild.build({ ...t, entryPoints: ["src/main.ts"], plugins: [stub], outfile: "test/main.build.mjs" });
   await esbuild.build({ ...t, entryPoints: ["headless/ih-sync.ts"], outfile: "test/ihheadless.build.mjs" });
 }
