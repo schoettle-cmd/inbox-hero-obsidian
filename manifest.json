@@ -1,0 +1,10 @@
+{
+  "id": "inbox-hero",
+  "name": "Inbox Hero",
+  "version": "1.0.0",
+  "minAppVersion": "1.8.0",
+  "description": "Share the folders you choose with your Inbox Hero account, so email drafts and answers can use your notes.",
+  "author": "mjonesone, LLC",
+  "authorUrl": "https://joininboxhero.com",
+  "isDesktopOnly": false
+}

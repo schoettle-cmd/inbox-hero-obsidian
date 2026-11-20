@@ -1,0 +1,7 @@
+node_modules/
+main.js
+headless/ih-sync.mjs
+test/*.build.mjs
+*.tgz
+.DS_Store
+data.json
